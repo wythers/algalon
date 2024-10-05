@@ -119,10 +119,10 @@ func resolveAddress(addr []string) string {
 	switch len(addr) {
 	case 0:
 		if port := os.Getenv("PORT"); port != "" {
-			fmt.Printf("[algalon]: Environment variable PORT=\"%s\"", port)
+			fmt.Printf("[algalon]: environment variable PORT=\"%s\"", port)
 			return ":" + port
 		}
-		fmt.Println("[algalon]: Environment variable PORT is undefined. Using port :8080 by default")
+		fmt.Println("[algalon]: environment variable PORT is undefined. using port :8080 by default")
 		return ":8080"
 	case 1:
 		return addr[0]

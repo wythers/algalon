@@ -49,21 +49,21 @@ func (client trc20) GenerateWallet() (provider.Wallet, error) {
 	privateKey, err := crypto.GenerateKey()
 
 	if err != nil {
-		return provider.Wallet{}, errors.New("algalon: " + err.Error())
+		return provider.Wallet{}, errors.New("[algalon]: " + err.Error())
 	}
 	privateKeyBytes := crypto.FromECDSA(privateKey)
 	hexPrivateKey := hexutil.Encode(privateKeyBytes)[2:]
 	publicKey := privateKey.Public()
 	publicKeyECDSA, ok := publicKey.(*ecdsa.PublicKey)
 	if !ok {
-		return provider.Wallet{}, errors.New("algalon: casting public key to ECDSA failed")
+		return provider.Wallet{}, errors.New("[algalon]: casting public key to ECDSA failed")
 	}
 
 	address := crypto.PubkeyToAddress(*publicKeyECDSA).Hex()
 	address = "41" + address[2:]
 	addb, err := hex.DecodeString(address)
 	if err != nil {
-		return provider.Wallet{}, errors.New("algalon: " + err.Error())
+		return provider.Wallet{}, errors.New("[algalon]: " + err.Error())
 	}
 	hash1 := s256(s256(addb))
 	secret := hash1[:4]
@@ -127,7 +127,7 @@ func jsonRPC(data []byte, url string, requestType string, tronApiKey []string) (
 
 	req, err := http.NewRequest(requestType, url, bytes.NewBuffer(data))
 	if err != nil {
-		return []byte{}, 0, errors.New("algalon: " + err.Error())
+		return []byte{}, 0, errors.New("[algalon]: " + err.Error())
 	}
 	req.Header.Set("Content-Type", "application/json")
 
@@ -143,13 +143,13 @@ func jsonRPC(data []byte, url string, requestType string, tronApiKey []string) (
 	}
 
 	if err != nil {
-		return []byte{}, 0, errors.New("algalon: " + err.Error())
+		return []byte{}, 0, errors.New("[algalon]: " + err.Error())
 	}
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return []byte{}, 0, errors.New("algalon: " + err.Error())
+		return []byte{}, 0, errors.New("[algalon]: " + err.Error())
 	}
 
 	return body, resp.StatusCode, nil

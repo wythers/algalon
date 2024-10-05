@@ -5,12 +5,12 @@ import (
 )
 
 var (
-	ErrSuspended      = errors.New("algalon: the current service has been suspended")
-	ErrEOF            = errors.New("algalon: at EOF")
-	ErrAppKeyInvalid  = errors.New("algalon: invalid algalon app key")
-	ErrClosed         = errors.New("algalon: the service has been closed")
-	ErrGenerateWallet = errors.New("algalon: generate wallet failed")
-	ErrTimeOut        = errors.New("algalon: timeout")
+	ErrSuspended      = errors.New("[algalon]: the current service has been suspended")
+	ErrEOF            = errors.New("[algalon]: at EOF")
+	ErrAppKeyInvalid  = errors.New("[algalon]: invalid algalon app key")
+	ErrClosed         = errors.New("[algalon]: the service has been closed")
+	ErrGenerateWallet = errors.New("[algalon]: generate wallet failed")
+	ErrTimeOut        = errors.New("[algalon]: timeout")
 )
 
 type Writer interface {
